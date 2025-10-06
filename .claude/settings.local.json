@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git stash push:*)",
+      "Bash(git checkout:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nAdd .vscode to .gitignore\n\nVSCodeの設定ディレクトリを無視リストに追加\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git merge:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nAdd vLLM API support for HuggingFace models\n\nHuggingFaceのモデルをvLLM経由で使用できる機能を追加。\nOpenAI互換のvLLM APIサーバーと通信し、ローカルまたはリモートでモデルを実行可能。\n\n主な変更:\n- VLLMAPIModelクラスの実装（vllm_api.py）\n- llm_builderでvllm_プレフィックスを持つモデル名のルーティング\n- openai依存関係の追加\n- vLLMセットアップガイドの作成\n- CHANGELOG.mdとCLAUDE.mdの作成\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
