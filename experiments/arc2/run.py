@@ -82,7 +82,9 @@ def generate_fn(
         :-3
     ]  # up to milliseconds
 
-    log_txt = llm_log_dir / f"log_{timestamp}_{model_name}.txt"
+    # モデル名のスラッシュをアンダースコアに置換（ファイル名として安全に）
+    safe_model_name = model_name.replace("/", "_")
+    log_txt = llm_log_dir / f"log_{timestamp}_{safe_model_name}.txt"
     log_txt.write_text(
         json.dumps(
             {"model": model_name, "cost": cost, "result": dataclasses.asdict(result)},
