@@ -8,7 +8,6 @@ wheels/
 
 # Virtual environments
 .venv
-.vscode
 
 .env
 outputs/
@@ -17,3 +16,4 @@ evals/
 
 .ipynb_checkpoints/
 notebook/
+.vscode/

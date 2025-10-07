@@ -1,0 +1,15 @@
+task_id: 0934a4d8  # ARC-AGI-2の最初のタスク（引用符なし）
+prompt_version: null
+max_num_nodes: 100
+checkpoint_path: null
+models:
+  - name: "vllm_microsoft/Phi-4-mini-reasoning"
+    temperature: 0.6
+algo:
+  class_name: "ABMCTSA"
+  params:
+    model_selection_strategy: "stack"
+
+hydra:
+  run:
+    dir: outputs/arc/phi4_task_${task_id}_${now:%Y-%m-%d_%H-%M-%S}

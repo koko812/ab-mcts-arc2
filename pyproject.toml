@@ -22,7 +22,6 @@ dependencies = [
     "joblib>=1.5.1",
     "networkx>=3.5",
     "pygraphviz>=1.14",
-    "openai>=1.12.0",
 ]
 
 [tool.uv.sources]
