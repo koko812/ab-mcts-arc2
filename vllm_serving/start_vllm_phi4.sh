@@ -1,5 +1,19 @@
 #!/bin/bash
 # vLLMサーバーを起動するスクリプト (microsoft/Phi-4-mini-reasoning用)
+#
+# ⚠️ 注意: このスクリプトは環境によっては動作しない場合があります
+#
+# 問題が発生する場合（特にポート競合エラー）は、以下のコマンドを直接実行してください:
+#
+#   cd vllm_serving
+#   uv run vllm serve microsoft/Phi-4-mini-reasoning \
+#       --port 8001 \
+#       --tensor-parallel-size 1 \
+#       --gpu-memory-utilization 0.9 \
+#       --max-model-len 32768 \
+#       --trust-remote-code
+#
+# 詳細は docs/VLLM_INTEGRATION_GUIDE.md の「トラブルシューティング」を参照してください
 
 set -e
 
