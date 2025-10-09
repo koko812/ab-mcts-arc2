@@ -10,7 +10,9 @@ wheels/
 .venv
 
 .env
-outputs/
+outputs/*
+!outputs/plots/
+!outputs/plots/**
 logging/
 evals/
 
