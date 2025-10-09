@@ -4049,13 +4049,13 @@ wheels = [
 [[package]]
 name = "vllm-serving"
 version = "0.1.0"
-source = { editable = "." }
+source = { virtual = "." }
 dependencies = [
     { name = "vllm" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "vllm", specifier = ">=0.6.0" }]
+requires-dist = [{ name = "vllm" }]
 
 [[package]]
 name = "watchfiles"
