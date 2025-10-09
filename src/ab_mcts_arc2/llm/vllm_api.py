@@ -59,9 +59,28 @@ def will_retry_generate_failure(e: BaseException) -> bool:
 def try_generate(api_model: "VLLMAPIModel", messages, temperature, request_samples=1):
     """vLLM APIにリクエストを送信"""
     # 環境変数からサンプリングパラメータを取得
-    # max_tokensは入力を考慮して少し余裕を持たせる（デフォルト16384 = 32768 / 2）
-    max_tokens = int(os.environ.get("VLLM_MAX_TOKENS", "16384"))
     top_p = float(os.environ.get("VLLM_TOP_P", "0.95"))
+
+    # モデルの最大コンテキスト長（通常32768）
+    max_model_len = int(os.environ.get("VLLM_MAX_MODEL_LEN", "32768"))
+
+    # 入力プロンプトのトークン数を概算（1文字=約0.5トークンと仮定、安全マージン込み）
+    prompt_text = " ".join([msg.get("content", "") for msg in messages])
+    estimated_input_tokens = int(len(prompt_text) * 0.6)  # 安全側に多めに見積もる
+
+    # 利用可能な出力トークン数を計算（安全マージン200を確保）
+    available_tokens = max_model_len - estimated_input_tokens - 200
+
+    # デフォルトのmax_tokensを取得（環境変数から、なければ16384）
+    default_max_tokens = int(os.environ.get("VLLM_MAX_TOKENS", "16384"))
+
+    # 実際に使用するmax_tokensは利用可能トークン数とデフォルトの小さい方
+    max_tokens = min(available_tokens, default_max_tokens)
+
+    # 最小値チェック（少なくとも1000トークンは確保）
+    if max_tokens < 1000:
+        print(f"Warning: max_tokens is very small ({max_tokens}). Input may be too long.")
+        max_tokens = 1000
 
     response = api_model.client.chat.completions.create(
         messages=messages,

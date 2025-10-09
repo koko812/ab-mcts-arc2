@@ -44,8 +44,10 @@ class ClaudeBedrockAPIModel(Model):
         base_delay = 10  # Always wait at least 10 seconds
         for i in range(self.num_trial):
             try:
+                # 環境変数から設定、デフォルトは8192
+                max_tokens = int(os.environ.get("CLAUDE_MAX_TOKENS", "8192"))
                 return self.client.messages.create(
-                    max_tokens=2048,
+                    max_tokens=max_tokens,
                     messages=messages,
                     model=self.model,
                     temperature=temperature,
